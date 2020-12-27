@@ -1,0 +1,54 @@
+name: flutter_unsplash
+description: Simple Flutter App showing trending images from Unsplash (https://unsplash.com/).
+version: 1.0.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # display images in staggered grid
+  flutter_staggered_grid_view: ^0.3.3
+  # open url for an image
+  url_launcher: ^5.0.2
+  # image loading
+  cached_network_image: ^2.5.0
+  # zoom images
+  photo_view: ^0.10.3
+  # format date
+  date_format: ^1.0.9
+  # firebase
+  firebase_core: ^0.5.3
+  # authentication
+  google_sign_in: ^4.5.6
+  firebase_auth: ^0.18.4+1
+  # cloud firestore
+  cloud_firestore: ^0.14.4
+
+  # other utility
+  parallax_image: 0.3.1+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # launcher icons
+  flutter_launcher_icons: "^0.7.0"
+
+# specify launcher icons
+flutter_icons:
+  image_path_android: "assets/ic_launcher_android.png"
+  android: true # can specify file name here e.g. "ic_launcher"
+  image_path_ios: "assets/ic_launcher_ios.png"
+  ios: true # can specify file name here e.g. "My-Launcher-Icon"
+  # android adaptive icons only available for Android 8.0 devices and above
+  adaptive_icon_foreground: "assets/ic_launcher_foreground.png"
+  adaptive_icon_background: "assets/ic_launcher_background.png"
+
+flutter:
+  uses-material-design: true
+
+
+
+#  assets:
+#    - assets/images/
+#    - assets/animations/
