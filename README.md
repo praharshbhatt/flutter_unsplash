@@ -12,6 +12,18 @@ A simple Flutter app showing trending images from [Unsplash](https://unsplash.co
 Create a simple flutter app that uses the unsplash API which allows you to search for photos and add them into collections in an elegant way.
 You should be view collections of pictures and, on closer inspection, be able to view collections related to each individual photo. Finally, when viewing collections and photos, they should be sortable by added date or popularity; popularity being how active a photo has been.
 
+## Features:
+1. Loads all the unsplash images
+2. All images are searchable
+3. View information on all the images
+4. Login with Google
+5. Ability to save the collection to user's profile.
+
+<div>
+<img src="https://github.com/kollerlukas/Flutter_Unsplash/raw/master/screenshots/demo/Demo-1.gif" alt="Unsplash Client" width="200">
+</div>
+
+
 
 ## Android Screenshots
 <div>
