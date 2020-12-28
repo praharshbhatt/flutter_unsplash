@@ -20,7 +20,7 @@ You should be view collections of pictures and, on closer inspection, be able to
 5. Ability to save the collection to user's profile.
 
 <div>
-<img src="https://github.com/kollerlukas/Flutter_Unsplash/raw/master/screenshots/demo/Demo-1.gif" alt="Unsplash Client" width="200">
+<img src="https://github.com/kollerlukas/Flutter_Unsplash/raw/master/demo/Demo-1.gif" alt="Unsplash Client" width="200">
 </div>
 
 
