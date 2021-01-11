@@ -102,17 +102,6 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  /// Asynchronously loads a [UnsplashImage] for a given [index].
-  Future<UnsplashImage> _loadImage(int index) async {
-    // check if new images need to be loaded
-    if (index >= images.length - 2) {
-      // Reached the end of the list. Try to load more images.
-      _loadImages(keyword: keyword);
-    }
-
-    return index < images.length ? images[index] : null;
-  }
-
   @override
   Widget build(BuildContext context) => WillPopScope(
         onWillPop: () async {
@@ -198,16 +187,6 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: Colors.grey[50],
       );
 
-  /// Returns a StaggeredTile for a given [image].
-  StaggeredTile _buildStaggeredTile(UnsplashImage image, int columnCount) {
-    // calc image aspect ration
-    double aspectRatio = image.getHeight().toDouble() / image.getWidth().toDouble();
-    // calc columnWidth
-    double columnWidth = MediaQuery.of(context).size.width / columnCount;
-    // not using [StaggeredTile.fit(1)] because during loading StaggeredGrid is really jumpy.
-    return StaggeredTile.extent(1, aspectRatio * columnWidth);
-  }
-
   /// Returns the grid that displays images.
   /// [orientation] can be used to adjust the grid column count.
   Widget _buildImageGrid({orientation = Orientation.portrait}) {
@@ -237,4 +216,24 @@ class _MainPageState extends State<MainPage> {
             // image loaded return [_ImageTile]
             ImageTile(snapshot.data),
       );
+
+  /// Asynchronously loads a [UnsplashImage] for a given [index].
+  Future<UnsplashImage> _loadImage(int index) async {
+    // check if new images need to be loaded
+    if (index >= images.length - 2) {
+      // Reached the end of the list. Try to load more images.
+      _loadImages(keyword: keyword);
+    }
+    return index < images.length ? images[index] : null;
+  }
+
+  /// Returns a StaggeredTile for a given [image].
+  StaggeredTile _buildStaggeredTile(UnsplashImage image, int columnCount) {
+    // calc image aspect ration
+    double aspectRatio = image.getHeight().toDouble() / image.getWidth().toDouble();
+    // calc columnWidth
+    double columnWidth = MediaQuery.of(context).size.width / columnCount;
+    // not using [StaggeredTile.fit(1)] because during loading StaggeredGrid is really jumpy.
+    return StaggeredTile.extent(1, aspectRatio * columnWidth);
+  }
 }

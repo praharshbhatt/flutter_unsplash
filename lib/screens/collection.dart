@@ -1,14 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_unsplash/models/collection/collections.dart';
 import 'package:flutter_unsplash/models/models.dart';
-import 'package:flutter_unsplash/services/auth.dart';
 import 'package:flutter_unsplash/widgets/image_tile.dart';
 import 'package:flutter_unsplash/widgets/loading_indicator.dart';
-import 'package:parallax_image/parallax_image.dart';
 
 import '../services/unsplash_image_provider.dart';
-import 'collections.dart';
 
 /// Screen for showing a collection of photos added by the [User].
 class CollectionScreen extends StatefulWidget {
@@ -54,6 +53,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
       loadingImages = true;
     });
 
+    //Add all the images
     await Future.forEach(widget.lstCollection, (imageID) async {
       images.add(await UnsplashImageProvider.loadImage(imageID));
     });
@@ -64,17 +64,6 @@ class _CollectionScreenState extends State<CollectionScreen> {
       loadingImages = false;
       images = images.toSet().toList();
     });
-  }
-
-  /// Asynchronously loads a [UnsplashImage] for a given [index].
-  Future<UnsplashImage> _loadImage(int index) async {
-    // check if new images need to be loaded
-    if (index >= images.length - 2) {
-      // Reached the end of the list. Try to load more images.
-      _loadImages();
-    }
-
-    return index < images.length ? images[index] : null;
   }
 
   @override
@@ -91,6 +80,11 @@ class _CollectionScreenState extends State<CollectionScreen> {
 
                 //Color
                 backgroundColor: Colors.grey[50],
+
+                leading: IconButton(
+                  icon: Icon(Platform.isIOS ? Icons.arrow_back_ios: Icons.arrow_back, color: Theme.of(context).textTheme.bodyText1.color),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
               ),
 
               //Grid view with all the images
@@ -137,8 +131,9 @@ class _CollectionScreenState extends State<CollectionScreen> {
   }
 
   /// Returns a FutureBuilder to load a [UnsplashImage] for a given [index].
-  Widget _buildImageItemBuilder(int index) => FutureBuilder(
-        future: _loadImage(index),
-        builder: (context, snapshot) => ImageTile(snapshot.data),
-      );
+  Widget _buildImageItemBuilder(int index) =>
+      FutureBuilder(future: _loadImage(index), builder: (context, snapshot) => ImageTile(snapshot.data));
+
+  /// Asynchronously loads a [UnsplashImage] for a given [index].
+  Future<UnsplashImage> _loadImage(int index) async => index < images.length ? images[index] : null;
 }
